@@ -1,19 +1,18 @@
-from core.analyzer import UrlAnalyzer
-
-
-def main():
-    # 🔹 Test avec une URL en dur
-    url = "http://192.168.1.1/login"
-    analyzer = UrlAnalyzer(url)
-    result = analyzer.analyze()
-
-    print("\n--- Résultat de l'analyse ---")
-    print(f"URL : {result['url']}")
-    print(f"Score : {result['score']}")
-    print("Problèmes détectés :")
-    for issue in result["issues"]:
-        print(f" - {issue}")
-
+from app.core.analyzer import UrlAnalyzer
+from app.core.report import ReportGenerator
 
 if __name__ == "__main__":
-    main()
+    test_urls = [
+        "https://example.com",
+        "http://192.168.0.1/login",
+        "https://secure-update.com",
+        "http://verify-account.net"
+    ]
+
+    for url in test_urls:
+        print(f"\nAnalyse de l'URL : {url}")
+        analyzer = UrlAnalyzer(url)
+        analyzer.analyze()
+
+        report = ReportGenerator(analyzer.score, analyzer.issues)
+        report.generate_report()
