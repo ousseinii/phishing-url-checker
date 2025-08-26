@@ -6,8 +6,8 @@ from app.cli.arguments import parse_arguments
 def process_url(url):
     analyzer = UrlAnalyzer(url)
     analyzer.analyze()
-    report = ReportGenerator(url, analyzer.score, analyzer.issues)  # ✅ on passe aussi l’URL
-    return report.generate_report()
+    report = ReportGenerator(url, analyzer.score, analyzer.issues)
+    return report.generate_report()  # On retourne du texte
 
 
 if __name__ == "__main__":
@@ -22,8 +22,8 @@ if __name__ == "__main__":
     # Cas 2 : fichier d’URLs
     elif args.file:
         try:
-            with open(args.file, "r") as f:
-                urls = [line.strip() for line in f.readlines() if line.strip()]
+            with open(args.file, "r", encoding="utf-8") as f:  # lecture UTF-8
+                urls = [line.strip() for line in f if line.strip()]
                 for url in urls:
                     results.append(process_url(url))
         except FileNotFoundError:
@@ -38,7 +38,7 @@ if __name__ == "__main__":
     output_text = "\n\n".join(results)
 
     if args.output:
-        with open(args.output, "w") as f:
+        with open(args.output, "w", encoding="utf-8") as f:  # écriture UTF-8
             f.write(output_text)
         print(f"✅ Rapport sauvegardé dans {args.output}")
     else:
