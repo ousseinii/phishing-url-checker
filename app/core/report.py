@@ -1,26 +1,34 @@
+from colorama import Fore, Style
+
 class ReportGenerator:
-    def __init__(self, url, score, issues):
-        self.url = url
-        self.score = score
+    def __init__(self, score, issues, url=None):
+        self.score = int(score)
         self.issues = issues
+        self.url = url
 
-    def generate_report(self):
+    def get_verdict(self, colored=True):
         if self.score == 0:
-            verdict = "SAFE"
-        elif self.score <= 2:
-            verdict = "SUSPICIOUS"
+            return (Fore.GREEN + "SAFE" + Style.RESET_ALL) if colored else "SAFE"
+        elif 1 <= self.score <= 2:
+            return (Fore.YELLOW + "SUSPICIOUS" + Style.RESET_ALL) if colored else "SUSPICIOUS"
         else:
-            verdict = "PHISHING"
+            return (Fore.RED + "PHISHING" + Style.RESET_ALL) if colored else "PHISHING"
 
-        report_lines = [
-            f"=== Analyse de l'URL : {self.url} ===",  # ✅ On affiche l’URL
-            f"Score : {self.score}",
-            f"Verdict : {verdict}"
-        ]
+    def generate_report(self, colored=True):
+        verdict = self.get_verdict(colored=colored)
+        report_lines = []
+
+        if self.url:
+            report_lines.append(f"🔗 URL analysée : {self.url}")
+
+        report_lines.append("=== Résultat de l'analyse ===")
+        report_lines.append(f"Score : {self.score}")
+        report_lines.append(f"Verdict : {verdict}")
 
         if self.issues:
             report_lines.append("\nIssues détectées :")
-            report_lines.extend([f"- {issue}" for issue in self.issues])
+            for issue in self.issues:
+                report_lines.append(f"- {issue}")
         else:
             report_lines.append("Aucune issue détectée ✅")
 

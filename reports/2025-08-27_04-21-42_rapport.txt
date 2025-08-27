@@ -1,0 +1,41 @@
+🔗 URL analysée : https://example.com
+=== Résultat de l'analyse ===
+Score : 0
+Verdict : SAFE
+Aucune issue détectée ✅
+
+🔗 URL analysée : http://192.168.0.1/login
+=== Résultat de l'analyse ===
+Score : 3
+Verdict : PHISHING
+
+Issues détectées :
+- L'URL n'utilise pas HTTPS
+- L'URL utilise une adresse IP au lieu d'un domaine
+- Mot suspect détecté dans l'URL : login
+
+🔗 URL analysée : https://secure-update.com
+=== Résultat de l'analyse ===
+Score : 2
+Verdict : SUSPICIOUS
+
+Issues détectées :
+- Mot suspect détecté dans l'URL : secure
+- Mot suspect détecté dans l'URL : update
+
+🔗 URL analysée : http://verify-account.net
+=== Résultat de l'analyse ===
+Score : 2
+Verdict : SUSPICIOUS
+
+Issues détectées :
+- L'URL n'utilise pas HTTPS
+- Mot suspect détecté dans l'URL : verify
+
+🔗 URL analysée : https://paypal.com.fake-login.ru
+=== Résultat de l'analyse ===
+Score : 1
+Verdict : SUSPICIOUS
+
+Issues détectées :
+- Mot suspect détecté dans l'URL : login
