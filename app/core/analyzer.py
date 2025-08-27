@@ -1,5 +1,6 @@
 import re
 from urllib.parse import urlparse
+from app.utils.helpers import get_suspicious_words
 
 class UrlAnalyzer:
     def __init__(self, url: str):
@@ -24,8 +25,7 @@ class UrlAnalyzer:
     
     # Vérifie si l'URL contient des mots suspects
     def check_suspicious_words(self):
-        suspicious_words = ["login", "secure", "update", "verify"]
-        for word in suspicious_words:
+        for word in get_suspicious_words():
             if word in self.url.lower():
                 self.issues.append(f"Mot suspect détecté dans l'URL : {word}")
                 self.score += 1
