@@ -1,4 +1,3 @@
-import pytest
 from app.core.analyzer import UrlAnalyzer
 
 def test_https_check():
